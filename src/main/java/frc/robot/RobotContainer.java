@@ -7,12 +7,50 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Subsystems.IntakeSubsystem;
+
+
+
 public class RobotContainer {
+
+  public final IntakeSubsystem intakeSubsystem = IntakeSubsystem.getInstance();
+
+  private static RobotContainer container;
+
+  public static StartIntake startintake = new StartIntake.getInstance();
+  public static StopIntake stopintake = new StopIntake.getInstance();
+
+  public static RobotContainer getInstance(){
+
+    if (container == null){
+      container = new RobotContainer();
+    }
+    return container;
+
+  }
+
+  public final CommandXboxController driver = new CommandXboxController(0);
+  public final CommandXboxController operator = new CommandXboxController(1);
+
+  
+
+  private final Trigger driverLeftTrigger = driver.leftTrigger();
+
+  public CommandXboxController getDriverController(){
+    return driver;
+  }
+
   public RobotContainer() {
     configureBindings();
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+
+    driverLeftTrigger.toggleOnTrue(() -> );
+
+  }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
