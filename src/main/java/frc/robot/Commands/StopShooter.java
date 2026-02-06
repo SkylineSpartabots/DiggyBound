@@ -3,16 +3,20 @@ import frc.robot.Subsystems.ShooterSubsystem.MotorSpeeds;
 
 public class StopShooter extends Command {
 
-    ShooterSubsystem shooter;
+    ShooterSubsystem s_Shooter;
+    MotorSpeeds state;
 
-    public StopShooter(){
-        shooter = ShooterSubsystem.getInstance();
+    public StopShooter(MotorSpeeds state){
+        s_Shooter = ShooterSubsystem.getInstance();
+        this.state = state;
+        addRequirements(s_Shooter);
+        
     }
 
     @Override
     public void initialize() {
         timer.restart();
-        shooter.setMotorSpeed(MotorSpeeds.HOLD);
+        s_Shooter.setMotorSpeed(MotorSpeeds.HOLD);
     }
 
     @Override
@@ -22,6 +26,11 @@ public class StopShooter extends Command {
     @Override
     public boolean isFinished() {
         return (timer.hasElapsed(1));
+    }
+
+    @Override
+    public void end() {
+        
     }
 
 }
