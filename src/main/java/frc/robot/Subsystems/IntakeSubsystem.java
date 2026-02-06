@@ -12,7 +12,7 @@ public class IntakeSubsystem extends SubsystemBase{
 
     private static IntakeSubsystem instance;
 
-    private static IntakeSubsystem getInstance() {
+    public static IntakeSubsystem getInstance() {
         if (instance == null) {
             instance = new IntakeSubsystem();
         }
@@ -23,7 +23,8 @@ public class IntakeSubsystem extends SubsystemBase{
     private enum MotorSpeeds{
         SLOW(0.5),
         FAST(1.0),
-        BACKWARDS(-1.0);
+        BACKWARDS(-1.0),
+        OFF(0.0);
 
         private double speed;
 
@@ -40,20 +41,24 @@ public class IntakeSubsystem extends SubsystemBase{
         }
     }
 
-    private TalonFX m_TalonFX = new TalonFX(1, "rio");
+    private TalonFX m_TalonFX;
 
-     private void config(TalonFX motor, NeutralModeValue neutralMode, InvertedValue direction){
+    public IntakeSubsystem() {
+        m_TalonFX = new TalonFX(0, "rio");
+    }
+
+
+    private void config(TalonFX motor, NeutralModeValue neutralMode, InvertedValue direction){
         TalonFXConfiguration config = new TalonFXConfiguration();
         config.MotorOutput.Inverted = direction;
         config.MotorOutput.NeutralMode = neutralMode;
 
         CurrentLimitsConfigs currentLimitsConfigs = new CurrentLimitsConfigs();
-        currentLimitsConfigs.SupplyCurrentLimit = Constants.CurrentLimits.outtakeContinuousCurrentLimit;
         currentLimitsConfigs.SupplyCurrentLimitEnable = true;
-        currentLimitsConfigs.StatorCurrentLimit = Constants.CurrentLimits.outtakePeakCurrentLimit;
         currentLimitsConfigs.StatorCurrentLimitEnable = true;
 
         config.CurrentLimits = currentLimitsConfigs;
         motor.getConfigurator().apply(config);
-  }
+    
+     }
 }
