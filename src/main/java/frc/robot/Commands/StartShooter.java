@@ -15,7 +15,6 @@ public class StartShooter extends Command {
 
     @Override
     public void initialize() {
-        timer.restart();
         s_Shooter.setMotorSpeed(MotorSpeeds.OUTTAKE);
     }
 
@@ -25,7 +24,7 @@ public class StartShooter extends Command {
 
     @Override
     public boolean isFinished() {
-        return (timer.hasElapsed(1));
+        return true;
     }
 
     @Override
