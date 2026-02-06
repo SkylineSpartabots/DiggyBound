@@ -3,7 +3,7 @@ import frc.robot.Subsystems.ShooterSubsystem.MotorSpeeds;
 
 public class StartShooter extends Command {
 
-    ShooterSubsystem shooter;
+    ShooterSubsystem s_Shooter;
     MotorSpeeds state;
 
     public StartShooter(MotorSpeeds state){
@@ -16,7 +16,7 @@ public class StartShooter extends Command {
     @Override
     public void initialize() {
         timer.restart();
-        shooter.setMotorSpeed(MotorSpeeds.OUTTAKE);
+        s_Shooter.setMotorSpeed(MotorSpeeds.OUTTAKE);
     }
 
     @Override
