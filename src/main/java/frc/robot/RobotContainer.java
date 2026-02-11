@@ -13,18 +13,17 @@ public class RobotContainer {
   
   CommandXboxController pjyController = new CommandXboxController(0);
   
-  private static RobotContainer container;
-  private final Trigger pjyRightTrigger = pjyController.rightTrigger();
-
-  pjyController.rightTrigger().whileTrue(s_Shooter.startShooter());
-  pjyController.rightTrigger().whileFalse(s_Shooter.stopShooter());
+  private static RobotContainer container;  
   
-  public RobotContainer() {
+  private void configureBindings() {
+     pjyController.rightTrigger().whileTrue(s_Shooter.startShooter());
+     pjyController.rightTrigger().onFalse(s_Shooter.stopShooter());
+  }
+   
+   public RobotContainer() {
     configureBindings();
   }
-
-  private void configureBindings() {}
-
+   
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
   }
