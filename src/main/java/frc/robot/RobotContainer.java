@@ -9,15 +9,15 @@ import edu.wpi.first.wpilibj2.command.Commands;
 
 public class RobotContainer {
 
-   ShooterSubsystem newShooter = ShooterSubsystem.getInstance();
+   ShooterSubsystem s_Shooter = ShooterSubsystem.getInstance();
   
   CommandXboxController pjyController = new CommandXboxController(0);
   
   private static RobotContainer container;
   private final Trigger pjyRightTrigger = pjyController.rightTrigger();
 
-  pjyController.rightTrigger().whileTrue(newShooter.startShooter());
-  pjyController.rightTrigger().whileFase(newShooter.stopShooter());
+  pjyController.rightTrigger().whileTrue(s_Shooter.startShooter());
+  pjyController.rightTrigger().whileFalse(s_Shooter.stopShooter());
   
   public RobotContainer() {
     configureBindings();
