@@ -13,6 +13,7 @@ import frc.robot.Subsystems.IntakeSubsystem;
 
 
 
+
 public class RobotContainer {
 
   public final IntakeSubsystem intakeSubsystem = IntakeSubsystem.getInstance();
@@ -48,7 +49,7 @@ public class RobotContainer {
 
   private void configureBindings() {
 
-    driverLeftTrigger.toggleOnTrue(() -> );
+    driverLeftTrigger.toggleOnTrue(() -> intakeSubsystem.setMotorSpeed(MotorSpeeds.SLOW()));
 
   }
 
